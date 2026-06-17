@@ -1,0 +1,14 @@
+FROM python:3.11-bookworm
+
+WORKDIR /app
+
+# Install dependencies
+COPY pyproject.toml ./
+RUN pip install --no-cache-dir .
+
+# Copy source code
+COPY env.py ./
+COPY tasks.py ./
+COPY tests/ ./tests/
+
+CMD ["hud", "dev", "env:env", "--stdio"]
